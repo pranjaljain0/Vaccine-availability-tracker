@@ -32,7 +32,6 @@ function App() {
 
   var audio = new Audio(ring);
 
-
   React.useEffect(() => {
     const fetchData = async () => {
       let url = "https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByDistrict?district_id=312&date=09-05-2021"
@@ -57,7 +56,7 @@ function App() {
     return (<tr key={element.name}>
       <td>{element.name}</td>
       <td>{element.fee_type}</td>
-      <td><Badge color={element.sessions[0].available_capacity !== 0 ? 'blue' : 'teal'} variant="filled">
+      <td><Badge color={element.sessions[0].available_capacity !== 0 ? 'teal' : 'red'} variant="filled">
         {element.sessions[0].available_capacity}
       </Badge></td>
       <td><Badge color={element.sessions[0].min_age_limit === 18 ? 'blue' : 'teal'} variant="filled">
@@ -74,7 +73,7 @@ function App() {
     <td>-</td>
   </tr>)
 
-  return (
+  return (<>
     <Table striped highlightOnHover>
       <thead>
         <tr>
@@ -87,7 +86,9 @@ function App() {
       </thead>
       <tbody>{rows}</tbody>
     </Table>
+  </>
   );
 }
 
 export default App;
+
