@@ -1,0 +1,28 @@
+@import '../../assets/style/constant.scss';
+nav {
+	display: flex;
+	width: 100vw;
+	align-items: center;
+	justify-content: space-between;
+	height: 80px;
+	border-bottom: 1px solid $secondary;
+
+	& a {
+		margin: 0 10px;
+		font-size: 1.4em;
+	}
+
+	& .button {
+		margin: 0 10px;
+		padding: 8px 16px;
+		border-radius: 8px;
+		border: 1px solid $secondary;
+		transition: all 0.2s ease-in;
+		background-color: rgba($color: $secondary, $alpha: 0.1);
+		cursor: pointer;
+
+		&:hover {
+			background-color: rgba($color: $secondary, $alpha: 0.2);
+		}
+	}
+}

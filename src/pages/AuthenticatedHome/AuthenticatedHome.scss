@@ -1,0 +1,137 @@
+@import '../../assets/style/constant.scss';
+
+.container-min {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 1em;
+	align-items: center;
+	width: 80%;
+	margin: auto;
+	max-width: 400px;
+	border-radius: 8px;
+	border: 1px solid $secondary;
+	margin-top: 20px;
+
+	& .benificiaries {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: column;
+		width: 100%;
+		margin: 10px;
+
+		& .benificiarieList {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+
+			& .benificiarieItem {
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+				width: 100%;
+
+				& span {
+					border-radius: 8px;
+					border: 1px solid #fff;
+					padding: 8px;
+				}
+
+				& div {
+					flex: 1;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					flex-direction: column;
+
+					&.left {
+					}
+					&.right {
+					}
+				}
+			}
+		}
+		& span {
+		}
+	}
+
+	& .selectors {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 10px;
+		width: 100%;
+
+		& select {
+			margin-right: 8px;
+			margin-left: 0;
+			flex: 1;
+			background-color: rgba($color: $secondary, $alpha: 0.4);
+			padding: 10px;
+			border-radius: 8px;
+			color: $secondary;
+
+			&:last-child {
+				margin-left: 8px;
+				margin-right: 0;
+			}
+		}
+	}
+
+	& .dataTable {
+		width: 100%;
+		position: relative;
+		margin-top: 20px;
+		overflow-y: scroll;
+
+		& table {
+			width: 100%;
+			position: relative;
+			border-collapse: separate;
+			border-width: 1.5px;
+			& th {
+				margin: 0;
+				white-space: nowrap;
+				padding: 4px;
+				background: rgba($color: $secondary, $alpha: 1);
+				color: $primary;
+				position: sticky;
+				top: 0; /* Don't forget this, required for the stickiness */
+				border-radius: 8px;
+				font-size: 0.9em;
+				z-index: 800;
+
+				&.headcol {
+					position: sticky;
+					left: 0;
+					z-index: 801;
+				}
+			}
+
+			& td {
+				margin: 0;
+				white-space: nowrap;
+				padding: 4px;
+				background: rgba($color: $secondary, $alpha: 0.2);
+				border-radius: 8px;
+				font-size: 0.8em;
+				z-index: 700;
+
+				&.headcol {
+					padding-right: 8px;
+					position: sticky;
+					left: 0;
+					background-color: darken($color: $grey, $amount: 10);
+					color: $secondary;
+					z-index: 800;
+				}
+			}
+
+			& .center {
+				text-align: center;
+			}
+		}
+	}
+}

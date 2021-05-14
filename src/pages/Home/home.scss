@@ -1,0 +1,59 @@
+@import '../../assets/style/constant.scss';
+
+.container-min {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 1em;
+	align-items: center;
+	width: 80%;
+	margin: auto;
+	max-width: 400px;
+	border-radius: 8px;
+	border: 1px solid $secondary;
+	margin-top: 20px;
+
+	& .inputContainer {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 10px 0;
+		height: 50px;
+		width: 300px;
+
+		& input[type='text'] {
+			background-color: rgba($color: $secondary, $alpha: 0.1);
+			padding: 0 1.1em;
+			border: 0px solid #fff;
+			border-radius: 8px;
+			height: 100%;
+			color: $secondary;
+
+			&:disabled {
+				color: rgba($color: $secondary, $alpha: 0.2);
+			}
+		}
+
+		& .nextIconContainer {
+			background-color: $secondary;
+			color: $primary;
+			height: 100%;
+			width: 50px;
+			margin-left: 10px;
+			border-radius: 50px 50px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+
+			& .nextIcon {
+				font-size: 1.4em;
+			}
+		}
+
+		& .IconDisabled {
+			cursor: not-allowed;
+			background-color: rgba($color: $secondary, $alpha: 0.2);
+		}
+	}
+}
