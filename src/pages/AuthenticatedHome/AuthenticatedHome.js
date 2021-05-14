@@ -39,7 +39,6 @@ function AuthenticatedHome({ state, dispatch }) {
     }
 
     useEffect(() => {
-        // fetchIDTypes()
         fetchStates()
         fetchBeneficiaries()
     }, [])

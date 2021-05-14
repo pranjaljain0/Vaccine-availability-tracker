@@ -26,3 +26,17 @@ nav {
 		}
 	}
 }
+
+.notification {
+	background-color: $secondary;
+	color: $primary;
+	text-align: center;
+	padding: 6px 0;
+
+	& span {
+		border: 1px solid $primary;
+		border-radius: 8px;
+		padding: 4px;
+		margin-left: 8px;
+	}
+}

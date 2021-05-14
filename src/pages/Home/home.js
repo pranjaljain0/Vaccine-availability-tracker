@@ -29,7 +29,7 @@ function Home({ state, dispatch }) {
             txnId: txnID
         }
         axios.post(validateMobileOtp, body).then(e => {
-            dispatch({ type: "LOGIN", payload: e.data })
+            dispatch({ type: "LOGIN", payload: { ...e.data, mobile: mobile } })
         })
     }
 
