@@ -36,7 +36,28 @@ nav {
 	& span {
 		border: 1px solid $primary;
 		border-radius: 8px;
-		padding: 4px;
+		padding: 4px 8px;
 		margin-left: 8px;
+		cursor: pointer;
+		transition: all 0.2s ease-in;
+		background-color: rgba($color: $primary, $alpha: 1);
+		color: $secondary;
+
+		&:hover {
+			background-color: rgba($color: $primary, $alpha: 0.4);
+		}
+	}
+
+	& .sendOTP {
+	}
+
+	& .enteOTP {
+		& input[type='text'] {
+			padding: 8px;
+			background-color: rgba($color: $primary, $alpha: 0.4);
+			color: $secondary;
+			border: 0px solid #fff;
+			border-radius: 8px;
+		}
 	}
 }

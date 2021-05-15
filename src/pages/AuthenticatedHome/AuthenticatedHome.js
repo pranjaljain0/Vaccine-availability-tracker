@@ -1,7 +1,7 @@
 import "./AuthenticatedHome.scss"
 
 import React, { useEffect, useState } from 'react'
-import { beneficiaries, calendarByDistrict, districts, idTypes, states, } from "../../config/API"
+import { beneficiaries, calendarByDistrict, districts, states, } from "../../config/API"
 
 import axios from "axios"
 import moment from "moment"

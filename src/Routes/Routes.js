@@ -10,12 +10,15 @@ import Home from "../pages/Home/home";
 import Nav from "../components/Nav/nav";
 import NotFound from "../pages/NotFound/NotFound";
 import Results from "../pages/results";
+import axios from "axios";
+import { beneficiaries } from "../config/API";
 import moment from "moment";
 
 function Routes() {
     const initialState = {
         isAuth: false,
         authToken: null,
+        hasDisconnected: false
     };
 
     const reducer = (state, action) => {
@@ -25,17 +28,27 @@ function Routes() {
                 payload = {
                     ...action.payload,
                     isAuth: true,
-                    time: moment().format()
+                    time: moment().format(),
+                    hasDisconnected: false
                 }
                 localStorage.setItem("authPayload", JSON.stringify(payload))
                 return payload
-            case "RECONNECT":
+            case "LOAD_LOCAL":
                 payload = {
                     ...action.payload,
                     isAuth: true,
-                    time: moment().format()
+                    time: moment().format(),
+                    hasDisconnected: false
                 }
                 localStorage.setItem("authPayload", JSON.stringify(payload))
+                return payload
+            case "HAS_DISCONNECTED":
+                payload = {
+                    ...action.payload,
+                    isAuth: true,
+                    time: moment().format(),
+                    hasDisconnected: true
+                }
                 return payload
             case "LOGOUT":
                 localStorage.clear()
@@ -48,7 +61,22 @@ function Routes() {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     useEffect(() => {
-        JSON.parse(localStorage.getItem("authPayload")) !== null && dispatch({ type: "RECONNECT", payload: JSON.parse(localStorage.getItem("authPayload")) })
+        let localStoreData = JSON.parse(localStorage.getItem("authPayload"))
+        const checkConn = async (token) => {
+            let config = {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            }
+            axios.get(beneficiaries, config).then(e => {
+
+            }).catch(err => {
+                dispatch({ type: "HAS_DISCONNECTED", payload: localStoreData })
+            })
+        }
+
+        localStoreData !== null && dispatch({ type: "LOAD_LOCAL", payload: localStoreData })
+        localStoreData !== undefined && localStoreData !== null && localStoreData.token !== undefined && setInterval(() => checkConn(localStoreData.token), 3000)
     }, [])
 
     return (

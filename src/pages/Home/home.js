@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { generateMobileOTP, validateMobileOtp } from "../../config/API"
 
 import { AiOutlineArrowRight } from "react-icons/ai"
+import { BsCheck } from "react-icons/bs"
 import axios from "axios"
 import classNames from "classnames"
 import { sha256 } from "js-sha256"
@@ -43,12 +44,13 @@ function Home({ state, dispatch }) {
                     setMobile(e.target.value.replace(/\D/, ''))
                 }} disabled={txnID === null ? false : true}></input>
             <div className={classNames("nextIconContainer", txnID !== null && "IconDisabled")} onClick={_ => callForOTP()}>
-                <AiOutlineArrowRight className="nextIcon" />
+                {txnID === null ? <AiOutlineArrowRight className="nextIcon" /> :
+                    <BsCheck className="nextIcon" />}
             </div>
 
         </div>
         {txnID !== null && <div className="inputContainer">
-            <input type="text" placeholder="_ _ _ _ _ _"
+            <input type="text"
                 value={OTP}
                 onChange={(e) => {
                     setOTP(e.target.value.replace(/\D/, ''))
