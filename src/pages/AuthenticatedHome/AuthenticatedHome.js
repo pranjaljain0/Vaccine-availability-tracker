@@ -6,6 +6,7 @@ import { beneficiaries, calendarByDistrict, districts, states, } from "../../con
 import { AiOutlineUserAdd } from "react-icons/ai"
 import NewBenModal from "../../components/Modal/NewBenModal"
 import axios from "axios"
+import classNames from "classnames"
 import moment from "moment"
 
 function AuthenticatedHome({ state, dispatch }) {
@@ -18,6 +19,7 @@ function AuthenticatedHome({ state, dispatch }) {
     const [districtList, setDistrictList] = useState(null)
     const [beneficialiesList, setBeneficialiesList] = useState(null)
     const [centersList, setCentersList] = useState(null)
+    const [selUsers, setSelUsers] = useState([])
 
     const [showAddBen, setShowAddBen] = useState(false)
 
@@ -61,7 +63,8 @@ function AuthenticatedHome({ state, dispatch }) {
                 </div>
                 <div className="benificiarieList">
                     {beneficialiesList !== undefined && beneficialiesList !== null && beneficialiesList.map((item, index) => {
-                        return (<div key={index} className="benificiarieItem">
+                        return (<div key={index} className={classNames("benificiarieItem",)} >
+                            {/* beneficiary_reference_id */}
                             <span>{item.name}</span>
                         </div>)
                     })}
