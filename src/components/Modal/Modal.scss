@@ -71,16 +71,15 @@
 						-webkit-appearance: none;
 					}
 					& .multiSelect {
-						display: flex;
-						align-items: center;
-						justify-content: space-between;
+						display: grid;
+						grid-template-columns: auto auto;
 						// width: 100%;
 
 						& .multiSelectItem {
 							background-color: rgba($color: #fff, $alpha: 0.2);
 							color: #fff;
+							margin: 3px;
 							padding: 4px 12px;
-							margin-right: 8px;
 							border-radius: 8px;
 
 							&.active {
@@ -88,6 +87,11 @@
 								color: #000;
 							}
 						}
+					}
+
+					&.subDetail {
+						margin: 2px 0;
+						font-size: 0.9em;
 					}
 				}
 				& .buttonContainer {
@@ -117,7 +121,7 @@
 		z-index: 810;
 		width: 100vw;
 		height: 100vh;
-		background-color: rgba($color: #fff, $alpha: 0.4);
+		background-color: rgba($color: #000, $alpha: 0.4);
 		backdrop-filter: blur(5px);
 	}
 }
@@ -128,7 +132,7 @@
 			& .content {
 				transform: none;
 				left: 0;
-				top: 0;
+				top: 20%;
 			}
 		}
 	}

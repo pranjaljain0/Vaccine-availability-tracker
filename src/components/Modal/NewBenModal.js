@@ -50,7 +50,7 @@ function NewBenModal({ showAddBen, setShowAddBen, config }) {
             <div className="modalContainer">
                 <div className="content">
                     <div className="ModalHeader">
-                        <span>Add User</span>
+                        <span>Add Beneficiary</span>
                         <AiFillCloseCircle className="closeIcon" onClick={() => setShowAddBen(false)} />
                     </div>
                     <div className="ModalMain">

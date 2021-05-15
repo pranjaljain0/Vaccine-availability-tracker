@@ -5,6 +5,7 @@ import { beneficiaries, calendarByDistrict, districts, states, } from "../../con
 
 import { AiOutlineUserAdd } from "react-icons/ai"
 import NewBenModal from "../../components/Modal/NewBenModal"
+import NewSession from "../../components/Modal/NewSession"
 import axios from "axios"
 import classNames from "classnames"
 import moment from "moment"
@@ -12,6 +13,7 @@ import moment from "moment"
 function AuthenticatedHome({ state, dispatch }) {
     let config = {
         headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${state.token}`,
         }
     }
@@ -19,9 +21,15 @@ function AuthenticatedHome({ state, dispatch }) {
     const [districtList, setDistrictList] = useState(null)
     const [beneficialiesList, setBeneficialiesList] = useState(null)
     const [centersList, setCentersList] = useState(null)
-    const [selUsers, setSelUsers] = useState([])
-
+    const [showNewSession, setShowNewSession] = useState(false)
+    const [selSession, setSelSession] = useState(null)
     const [showAddBen, setShowAddBen] = useState(false)
+    const [newSession, setNewSession] = useState({
+        dose: 1,
+        session_id: "",
+        slot: "09:00AM-11:00AM",
+        beneficiaries: []
+    })
 
     const fetchBeneficiaries = async () => {
         axios.get(beneficiaries, config).then(e => setBeneficialiesList(e.data.beneficiaries))
@@ -36,7 +44,9 @@ function AuthenticatedHome({ state, dispatch }) {
     }
 
     const fetchDistrictData = async (distID) => {
-        axios.get(calendarByDistrict + `district_id=${distID}&date=${moment().format("DD-MM-YYYY")}&vaccine=COVAXIN`, config).then(e => setCentersList(e.data.centers))
+        axios.get(calendarByDistrict + `district_id=${distID}&date=${moment().format("DD-MM-YYYY")}`, config).then(e => {
+            setCentersList(e.data.centers)
+        })
     }
 
     useEffect(() => {
@@ -44,28 +54,32 @@ function AuthenticatedHome({ state, dispatch }) {
         fetchBeneficiaries()
     }, [])
 
-    // const getIDName = (id) => {
-    //     IDTypes !== undefined && IDTypes !== null && IDTypes.map((item, index) => {
-    //         item.id === id && console.log(item)
-    //     })
-    // }
-
     const truncateString = (string, length) => {
         return string.length < length ? string : `${string.slice(0, length - 3)}...`;
     };
 
+    const handleBenArr = (id) => {
+        newSession.beneficiaries.includes(id) ? setNewSession({ ...newSession, beneficiaries: newSession.beneficiaries.filter((value, index, arr) => value !== id) }) : setNewSession({ ...newSession, beneficiaries: [...newSession.beneficiaries, id] })
+    }
+
     return (
         <div className="container-min">
-            <div className="benificiaries">
-                <div className="benificiariesHead">
-                    <span>Benificiaries</span>
+            <div className="beneficiaries">
+                <div className="beneficiariesHead">
+                    <span>Beneficiaries</span>
                     <AiOutlineUserAdd className="addIcon" onClick={() => setShowAddBen(true)} />
                 </div>
                 <div className="benificiarieList">
                     {beneficialiesList !== undefined && beneficialiesList !== null && beneficialiesList.map((item, index) => {
-                        return (<div key={index} className={classNames("benificiarieItem",)} >
-                            {/* beneficiary_reference_id */}
+                        return (<div
+                            key={index}
+                            className={classNames("benificiarieItem", newSession.beneficiaries.includes(item.beneficiary_reference_id) && "activeCell")}
+                            onClick={() => { handleBenArr(item.beneficiary_reference_id) }}>
                             <span>{item.name}</span>
+                            <span className="subDetail">{item.birth_year}</span>
+                            <div className="vaccinatedUpdate">
+                                <span>{item.vaccination_status}</span>
+                            </div>
                         </div>)
                     })}
                 </div>
@@ -98,7 +112,12 @@ function AuthenticatedHome({ state, dispatch }) {
                         <th>vaccine</th>
                     </tr>
                     {centersList !== undefined && centersList !== null && centersList.map((item, index) => {
-                        return (<tr key={index}>
+                        // item.sessions[0].session_id
+                        return (<tr key={index} onClick={() => {
+                            setNewSession({ ...newSession, session_id: item.sessions[0].session_id })
+                            setSelSession(item)
+                            setShowNewSession(true)
+                        }}>
                             <td className="headcol">{truncateString(item.name, 20)}</td>
                             <td className="center">{item.sessions[0].min_age_limit}</td>
                             <td className="center">{item.sessions[0].available_capacity}</td>
@@ -110,68 +129,9 @@ function AuthenticatedHome({ state, dispatch }) {
                 </table>
             </div>
             <NewBenModal showAddBen={showAddBen} setShowAddBen={setShowAddBen} config={config} />
-        </div>
+            <NewSession show={showNewSession} setShow={setShowNewSession} selSession={selSession} newSession={newSession} setNewSession={setNewSession} config={config} />
+        </div >
     )
 }
 
 export default AuthenticatedHome
-// {
-//     "beneficiary_reference_id": "41371803146720",
-//     "name": "Pranjal Jain",
-//     "birth_year": "1997",
-//     "gender": "Male",
-//     "mobile_number": "9743",
-//     "photo_id_type": 1,
-//     "photo_id_number": "********3405",
-//     "comorbidity_ind": "N",
-//     "vaccination_status": "Partially Vaccinated",
-//     "vaccine": "COVAXIN",
-//     "dose1_date": "12-05-2021",
-//     "dose2_date": "",
-//     "appointments": [
-//         {
-//             "appointment_id": "d3397f86-4e07-4ad9-9dc1-b265d38dfe01",
-//             "center_id": 695667,
-//             "name": "Imperiol HSS Itwara18",
-//             "state_name": "Madhya Pradesh",
-//             "district_name": "Bhopal",
-//             "block_name": "PHANDA",
-//             "from": "09:00",
-//             "to": "17:00",
-//             "dose": 1,
-//             "session_id": "269ce29f-5f78-4ad7-8891-32dc1c947786",
-//             "date": "12-05-2021",
-//             "slot": "09:00AM-11:00AM"
-//         }
-//     ]
-// }
-
-// {
-//     "center_id": 691691,
-//     "name": "Govt H.S.S No 2 Bhind COVAXIN",
-//     "address": "Govt H.S.S No 2 Bhind COVAXIN",
-//     "state_name": "Madhya Pradesh",
-//     "district_name": "Bhind",
-//     "block_name": "Bhind",
-//     "pincode": 477001,
-//     "lat": 26,
-//     "long": 78,
-//     "from": "09:00:00",
-//     "to": "18:00:00",
-//     "fee_type": "Free",
-//     "sessions": [
-//         {
-//             "session_id": "3f4f10f8-4e9a-49af-ad21-1cd1145a598b",
-//             "date": "15-05-2021",
-//             "available_capacity": 0,
-//             "min_age_limit": 45,
-//             "vaccine": "COVAXIN",
-//             "slots": [
-//                 "09:00AM-11:00AM",
-//                 "11:00AM-01:00PM",
-//                 "01:00PM-03:00PM",
-//                 "03:00PM-06:00PM"
-//             ]
-//         }
-//     ]
-// }
