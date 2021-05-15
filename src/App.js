@@ -6,7 +6,7 @@ import Routes from "./Routes/Routes";
 
 function App() {
   useEffect(() => {
-    localStorage.setItem("authPayload", JSON.stringify({
+    localStorage.getItem("authPayload") === null && localStorage.setItem("authPayload", JSON.stringify({
       isAuth: false,
       authToken: null,
       hasDisconnected: false
