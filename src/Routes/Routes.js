@@ -31,7 +31,6 @@ function Routes() {
                     time: moment().format(),
                     hasDisconnected: false
                 }
-                localStorage.setItem("authPayload", JSON.stringify(payload))
                 return payload
             case "LOGIN":
                 payload = {
