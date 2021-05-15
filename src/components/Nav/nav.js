@@ -1,7 +1,7 @@
 import "./nav.scss"
 
-import React, { useEffect, useState } from 'react'
-import { generateMobileOTP, states, validateMobileOtp } from "../../config/API"
+import React, { useState } from 'react'
+import { generateMobileOTP, validateMobileOtp } from "../../config/API"
 
 import { Link } from 'react-router-dom'
 import axios from "axios"
@@ -39,9 +39,9 @@ function Nav({ state, dispatch }) {
     return (<>
         <nav>
             <Link to="/">Covid Vaccine Tracker</Link>
-            {state.isAuth && <span className="button" onClick={_ => dispatch({ type: "LOGOUT" })}>LOGOUT</span>}
+            {localStoreData.isAuth && <span className="button" onClick={_ => dispatch({ type: "LOGOUT" })}>LOGOUT</span>}
         </nav>
-        {state.hasDisconnected === true && <div className="notification">
+        {localStoreData.hasDisconnected === true && <div className="notification">
             <div className="sendOTP">
                 Seems like your token is expired Re enter OTP to try Again
             <span onClick={() => resendOTP()}>Re-send</span>
