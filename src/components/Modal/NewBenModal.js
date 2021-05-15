@@ -11,6 +11,7 @@ function NewBenModal({ showAddBen, setShowAddBen, config }) {
 
     const [genderList, setGenderList] = useState(null)
     const [IDList, setIDList] = useState(null)
+    const [selectedIDName, setSelectedIDName] = useState(null)
     const [uploadObj, setUploadObj] = useState({
         birth_year: "",
         consent_version: "V1",
@@ -30,9 +31,12 @@ function NewBenModal({ showAddBen, setShowAddBen, config }) {
 
     const addUser = async () => {
         axios.post(newID, config).then(e => {
-            console.log("added")
-        }).catch(err =>
-            console.error(err))
+            setShowAddBen(false)
+            console.log("User Added")
+        }).catch(err => {
+            setShowAddBen(false)
+            console.error(err)
+        })
     }
 
     useEffect(() => {
@@ -56,15 +60,18 @@ function NewBenModal({ showAddBen, setShowAddBen, config }) {
                         </div>
                         <div className="inputGroup">
                             <label>ID</label>
-                            <select value={uploadObj.photo_id_type} onChange={(e) => { setUploadObj({ ...uploadObj, photo_id_type: e.target.value }) }}>
+                            <select value={uploadObj.photo_id_type} onChange={(e) => {
+                                setSelectedIDName(e.target.options[e.target.selectedIndex].text)
+                                setUploadObj({ ...uploadObj, photo_id_type: e.target.value })
+                            }}>
                                 {IDList !== undefined && IDList !== null &&
                                     IDList.map((item, index) => {
-                                        return (<option value={item.id}>{item.type}</option>)
+                                        return (<option name={item.type} value={item.id}>{item.type}</option>)
                                     })}
                             </select>
                         </div>
                         <div className="inputGroup">
-                            <label>ID Number</label>
+                            <label>{selectedIDName} Number</label>
                             <input type="text"></input>
                         </div>
                         <div className="inputGroup">
