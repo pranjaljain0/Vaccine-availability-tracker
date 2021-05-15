@@ -24,6 +24,15 @@ function Routes() {
     const reducer = (state, action) => {
         let payload = {}
         switch (action.type) {
+            case "INIT":
+                payload = {
+                    ...action.payload,
+                    isAuth: false,
+                    time: moment().format(),
+                    hasDisconnected: false
+                }
+                localStorage.setItem("authPayload", JSON.stringify(payload))
+                return payload
             case "LOGIN":
                 payload = {
                     ...action.payload,
@@ -75,8 +84,9 @@ function Routes() {
                 dispatch({ type: "HAS_DISCONNECTED", payload: localStoreData })
             })
         }
-
-        localStoreData !== null && dispatch({ type: "LOAD_LOCAL", payload: localStoreData })
+        // INIT
+        localStoreData === null && dispatch({ type: "INIT", payload: localStoreData })
+        localStoreData.isAuth === true && dispatch({ type: "LOAD_LOCAL", payload: localStoreData })
         localStoreData !== undefined && localStoreData !== null && localStoreData.token !== undefined && setInterval(() => checkConn(localStoreData.token), 3000)
     }, [])
 

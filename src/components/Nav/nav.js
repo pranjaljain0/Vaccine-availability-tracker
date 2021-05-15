@@ -39,9 +39,9 @@ function Nav({ state, dispatch }) {
     return (<>
         <nav>
             <Link to="/">Covid Vaccine Tracker</Link>
-            {localStoreData.isAuth && <span className="button" onClick={_ => dispatch({ type: "LOGOUT" })}>LOGOUT</span>}
+            {localStoreData !== null && localStoreData.isAuth && <span className="button" onClick={_ => dispatch({ type: "LOGOUT" })}>LOGOUT</span>}
         </nav>
-        {localStoreData.hasDisconnected === true && <div className="notification">
+        {localStoreData !== null && localStoreData.hasDisconnected === true && <div className="notification">
             <div className="sendOTP">
                 Seems like your token is expired Re enter OTP to try Again
             <span onClick={() => resendOTP()}>Re-send</span>
