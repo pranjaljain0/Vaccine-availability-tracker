@@ -26,17 +26,20 @@
 			align-items: center;
 			justify-content: center;
 			width: 100%;
+			overflow: scroll;
 
 			& .benificiarieItem {
 				display: flex;
 				align-items: center;
 				justify-content: space-around;
 				width: 100%;
+				white-space: nowrap;
 
 				& span {
 					border-radius: 8px;
 					border: 1px solid #fff;
 					padding: 8px;
+					margin-right: 8px;
 				}
 
 				& div {
@@ -61,22 +64,18 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		flex-direction: column;
 		margin-top: 10px;
 		width: 100%;
 
 		& select {
-			margin-right: 8px;
-			margin-left: 0;
+			margin: 6px 0;
 			flex: 1;
+			width: 100%;
 			background-color: rgba($color: $secondary, $alpha: 0.4);
 			padding: 10px;
 			border-radius: 8px;
 			color: $secondary;
-
-			&:last-child {
-				margin-left: 8px;
-				margin-right: 0;
-			}
 		}
 	}
 

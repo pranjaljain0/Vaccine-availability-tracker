@@ -52,6 +52,7 @@ nav {
 	}
 
 	& .enteOTP {
+		margin-top: 10px;
 		& input[type='text'] {
 			padding: 8px;
 			background-color: rgba($color: $primary, $alpha: 0.4);
