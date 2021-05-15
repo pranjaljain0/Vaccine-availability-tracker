@@ -85,7 +85,7 @@ function Routes() {
         }
         // INIT
         localStoreData === null && dispatch({ type: "INIT", payload: localStoreData })
-        localStoreData.isAuth === true && dispatch({ type: "LOAD_LOCAL", payload: localStoreData })
+        localStoreData !== null && localStoreData.isAuth === true && dispatch({ type: "LOAD_LOCAL", payload: localStoreData })
         localStoreData !== undefined && localStoreData !== null && localStoreData.token !== undefined && setInterval(() => checkConn(localStoreData.token), 3000)
     }, [])
 
