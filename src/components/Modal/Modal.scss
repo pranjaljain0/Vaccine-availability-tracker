@@ -1,0 +1,134 @@
+.modal {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	z-index: 811;
+
+	& .modalContainer {
+		height: 100%;
+		width: 100%;
+		z-index: 812;
+		position: fixed;
+		top: 0;
+		left: 0;
+		margin: auto;
+
+		& .content {
+			background-color: black;
+			border-radius: 8px;
+			border: 1px solid #fff;
+			position: relative;
+			max-width: 400px;
+			height: auto;
+			margin: 20px;
+			padding: 12px;
+			transform: translate(-50%, -50%);
+			left: 50%;
+			top: 50%;
+
+			& .ModalHeader {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				& .closeIcon {
+					color: #fff;
+					font-size: 1.4em;
+				}
+			}
+
+			& .ModalMain {
+				margin-top: 10px;
+				& .inputGroup {
+					display: flex;
+					align-items: flex-start;
+					flex-direction: column;
+					justify-content: space-between;
+					width: 100%;
+					margin: 8px 0;
+
+					& label {
+						font-size: 0.8em;
+					}
+					& input[type='text'] {
+						margin-top: 4px;
+						flex: 1;
+						background-color: rgba($color: #fff, $alpha: 0.2);
+						padding: 10px;
+						border: 0px solid #fff;
+						border-radius: 8px;
+						color: #fff;
+					}
+					& select {
+						margin-top: 4px;
+						flex: 1;
+						background-color: rgba($color: #fff, $alpha: 0.2);
+						padding: 10px;
+						border: 0px solid #fff;
+						border-radius: 8px;
+						color: #fff;
+					}
+					& .multiSelect {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						// width: 100%;
+
+						& .multiSelectItem {
+							background-color: rgba($color: #fff, $alpha: 0.2);
+							color: #fff;
+							padding: 4px 12px;
+							margin-right: 8px;
+							border-radius: 8px;
+
+							&.active {
+								background-color: #fff;
+								color: #000;
+							}
+						}
+					}
+				}
+				& .buttonContainer {
+					margin-top: 20px;
+					width: 100%;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					& .addButton {
+						background-color: #fff;
+						color: #000;
+						margin: auto;
+						padding: 4px 12px;
+						border-radius: 8px;
+						transition: all 0.2s ease-in;
+
+						&:hover {
+							background-color: rgba($color: #fff, $alpha: 0.8);
+						}
+					}
+				}
+			}
+		}
+	}
+	& .modalBackdrop {
+		z-index: 810;
+		width: 100vw;
+		height: 100vh;
+		background-color: rgba($color: #fff, $alpha: 0.4);
+		backdrop-filter: blur(5px);
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.modal {
+		& .modalContainer {
+			& .content {
+				transform: none;
+				left: 0;
+				top: 0;
+			}
+		}
+	}
+}

@@ -3,6 +3,8 @@ import "./AuthenticatedHome.scss"
 import React, { useEffect, useState } from 'react'
 import { beneficiaries, calendarByDistrict, districts, states, } from "../../config/API"
 
+import { AiOutlineUserAdd } from "react-icons/ai"
+import NewBenModal from "../../components/Modal/NewBenModal"
 import axios from "axios"
 import moment from "moment"
 
@@ -16,6 +18,8 @@ function AuthenticatedHome({ state, dispatch }) {
     const [districtList, setDistrictList] = useState(null)
     const [beneficialiesList, setBeneficialiesList] = useState(null)
     const [centersList, setCentersList] = useState(null)
+
+    const [showAddBen, setShowAddBen] = useState(false)
 
     const fetchBeneficiaries = async () => {
         axios.get(beneficiaries, config).then(e => setBeneficialiesList(e.data.beneficiaries))
@@ -51,7 +55,10 @@ function AuthenticatedHome({ state, dispatch }) {
     return (
         <div className="container-min">
             <div className="benificiaries">
-                <span>Benificiaries</span>
+                <div className="benificiariesHead">
+                    <span>Benificiaries</span>
+                    <AiOutlineUserAdd className="addIcon" onClick={() => setShowAddBen(true)} />
+                </div>
                 <div className="benificiarieList">
                     {beneficialiesList !== undefined && beneficialiesList !== null && beneficialiesList.map((item, index) => {
                         return (<div key={index} className="benificiarieItem">
@@ -99,6 +106,7 @@ function AuthenticatedHome({ state, dispatch }) {
                     })}
                 </table>
             </div>
+            <NewBenModal showAddBen={showAddBen} setShowAddBen={setShowAddBen} config={config} />
         </div>
     )
 }
