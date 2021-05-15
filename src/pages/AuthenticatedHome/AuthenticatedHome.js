@@ -44,6 +44,10 @@ function AuthenticatedHome({ state, dispatch }) {
     //     })
     // }
 
+    const truncateString = (string, length) => {
+        return string.length < length ? string : `${string.slice(0, length - 3)}...`;
+    };
+
     return (
         <div className="container-min">
             <div className="benificiaries">
@@ -85,7 +89,7 @@ function AuthenticatedHome({ state, dispatch }) {
                     </tr>
                     {centersList !== undefined && centersList !== null && centersList.map((item, index) => {
                         return (<tr key={index}>
-                            <td className="headcol">{item.name}</td>
+                            <td className="headcol">{truncateString(item.name, 20)}</td>
                             <td className="center">{item.sessions[0].min_age_limit}</td>
                             <td className="center">{item.sessions[0].available_capacity}</td>
                             <td className="center">{item.pincode}</td>
