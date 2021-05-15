@@ -16,11 +16,6 @@ function AuthenticatedHome({ state, dispatch }) {
     const [districtList, setDistrictList] = useState(null)
     const [beneficialiesList, setBeneficialiesList] = useState(null)
     const [centersList, setCentersList] = useState(null)
-    // const [IDTypes, setIDTypes] = useState(null)
-
-    // const fetchIDTypes = async () => {
-    //     axios.get(idTypes, config).then(e => setIDTypes(e.data.types))
-    // }
 
     const fetchBeneficiaries = async () => {
         axios.get(beneficiaries, config).then(e => setBeneficialiesList(e.data.beneficiaries))

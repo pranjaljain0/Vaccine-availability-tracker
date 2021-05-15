@@ -49,6 +49,7 @@ function Routes() {
                     time: moment().format(),
                     hasDisconnected: true
                 }
+                localStorage.setItem("authPayload", JSON.stringify(payload))
                 return payload
             case "LOGOUT":
                 localStorage.clear()
