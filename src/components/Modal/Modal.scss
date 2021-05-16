@@ -28,6 +28,30 @@
 			left: 50%;
 			top: 50%;
 
+			& .ModalInfo {
+				border-radius: 8px;
+				border: 1px solid #fff;
+				margin: 4px;
+				padding: 4px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				& .infoIcon {
+					font-size: 1.4em;
+					margin: 0 5px;
+				}
+
+				& span {
+					font-size: 0.8em;
+					margin-left: 10px;
+
+					& a {
+						text-decoration: underline;
+					}
+				}
+			}
+
 			& .ModalHeader {
 				display: flex;
 				align-items: center;

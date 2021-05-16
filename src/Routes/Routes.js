@@ -93,7 +93,6 @@ function Routes() {
         <Router>
             <Nav state={state} dispatch={dispatch} />
             <Switch>
-                <Route path="/results" component={Results} />
                 <Route path="/"  >
                     {!state.isAuth ? <Home dispatch={dispatch} /> : <AuthenticatedHome state={state} dispatch={dispatch} />}
                 </Route>
