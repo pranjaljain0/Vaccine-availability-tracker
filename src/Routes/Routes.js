@@ -40,7 +40,7 @@ function Routes() {
             <Footer />
             <Switch>
                 <Route path="/"  >
-                    {!state.isAuth ? <Home dispatch={dispatch} /> : <AuthenticatedHome authState={state} authDispatch={dispatch} />}
+                    {state !== null && (!state.isAuth ? <Home dispatch={dispatch} /> : <AuthenticatedHome authState={state} authDispatch={dispatch} />)}
                 </Route>
                 <Route path="*" component={NotFound} />
             </Switch>

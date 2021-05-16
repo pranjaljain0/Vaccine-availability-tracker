@@ -15,13 +15,14 @@ function App() {
     stateID: null,
   }))
 
-  // useEffect(() => {
-  //   if (!("Notification" in window)) {
-  //     console.log("This browser does not support desktop notification");
-  //   } else {
-  //     Notification.requestPermission();
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (!("Notification" in window)) {
+      console.log("This browser does not support desktop notification");
+    } else {
+      Notification.requestPermission();
+    }
+    // setInterval(() => { showNotification() }, 10000)
+  }, [])
 
   return (
     <Routes />
