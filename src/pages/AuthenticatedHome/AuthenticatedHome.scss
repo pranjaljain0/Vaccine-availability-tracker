@@ -9,6 +9,7 @@
 	padding: 1em;
 	display: flex;
 	align-items: center;
+	max-width: 400px;
 	justify-content: center;
 
 	& .infoIcon {
@@ -27,6 +28,7 @@
 }
 
 .container-min {
+	margin-bottom: 100px !important;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
@@ -174,7 +176,6 @@
 		position: relative;
 		margin-top: 20px;
 		overflow-y: scroll;
-		margin-bottom: 100px;
 
 		& table {
 			width: 100%;

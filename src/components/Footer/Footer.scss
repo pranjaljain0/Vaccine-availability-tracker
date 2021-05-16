@@ -4,8 +4,6 @@ footer {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
-	font-size: 0.9em;
-	padding: 1em;
 	border-top: 1px solid $secondary;
 	display: flex;
 	align-items: flex-start;
@@ -14,15 +12,32 @@ footer {
 	background-color: $primary;
 	z-index: 830;
 
-	& a {
-		background-color: rgba($color: #fff, $alpha: 0.4);
-		padding: 4px 12px;
-		border-radius: 8px;
-		margin-bottom: 8px;
+	& .top {
+		font-size: 0.9em;
+		flex: 1;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		& a {
+			margin: 8px;
+			background-color: rgba($color: #fff, $alpha: 0.4);
+			padding: 4px 12px;
+			border-radius: 8px;
+		}
 	}
 
-	& span {
-		color: rgba($color: #fff, $alpha: 0.7);
-		font-size: 0.9em;
+	& .bottom {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+
+		& span {
+			color: rgba($color: #fff, $alpha: 0.7);
+			font-size: 0.9em;
+			margin-bottom: 4px;
+		}
 	}
 }

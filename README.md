@@ -4,8 +4,12 @@
 
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/pranjaljain0/Vaccine-availability-tracker.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/pranjaljain0/Vaccine-availability-tracker/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/pranjaljain0/Vaccine-availability-tracker.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/pranjaljain0/Vaccine-availability-tracker/context:javascript) [![Website trackvaccine.pranjaljain.me/](https://img.shields.io/website-up-down-green-red/http/trackvaccine.pranjaljain.me.svg)](https://pranjaljain.me) [![GitHub license](https://img.shields.io/github/license/pranjaljain0/Vaccine-availability-tracker.svg)](https://github.com/pranjaljain0/Vaccine-availability-tracker/blob/master/LICENSE) [![GitHub release](https://img.shields.io/github/release/pranjaljain0/Vaccine-availability-tracker.svg)](https://GitHub.com/pranjaljain0/Vaccine-availability-tracker/releases/) [![GitHub stars](https://img.shields.io/github/stars/pranjaljain0/Vaccine-availability-tracker.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/pranjaljain0/Vaccine-availability-tracker/stargazers/)
 
-# Introduction
+## Introduction
 
 Create issues or PRs to contribute.
 
 [Website Link](http://trackvaccine.pranjaljain.me/)
+
+## API Reference
+
+[apisetu.gov.in](https://apisetu.gov.in/public/marketplace/api/cowin/cowin-protected-v2#/)
