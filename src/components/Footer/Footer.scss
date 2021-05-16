@@ -1,0 +1,28 @@
+@import '../../assets/style/constant.scss';
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	font-size: 0.9em;
+	padding: 1em;
+	border-top: 1px solid $secondary;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	flex-direction: column;
+	background-color: $primary;
+	z-index: 830;
+
+	& a {
+		background-color: rgba($color: #fff, $alpha: 0.4);
+		padding: 4px 12px;
+		border-radius: 8px;
+		margin-bottom: 8px;
+	}
+
+	& span {
+		color: rgba($color: #fff, $alpha: 0.7);
+		font-size: 0.9em;
+	}
+}

@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import AuthenticatedHome from "../pages/AuthenticatedHome/AuthenticatedHome";
+import Footer from "../components/Footer/Footer";
 import Home from "../pages/Home/home";
 import Nav from "../components/Nav/nav";
 import NotFound from "../pages/NotFound/NotFound";
@@ -92,6 +93,7 @@ function Routes() {
     return (
         <Router>
             <Nav state={state} dispatch={dispatch} />
+            <Footer />
             <Switch>
                 <Route path="/"  >
                     {!state.isAuth ? <Home dispatch={dispatch} /> : <AuthenticatedHome state={state} dispatch={dispatch} />}
