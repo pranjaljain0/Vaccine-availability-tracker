@@ -61,7 +61,7 @@ function Routes() {
                 localStorage.setItem("authPayload", JSON.stringify(payload))
                 return payload
             case "LOGOUT":
-                localStorage.clear()
+                localStorage.setItem("authPayload", JSON.stringify(initialState))
                 return initialState
             default:
                 return state

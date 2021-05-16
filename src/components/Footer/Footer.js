@@ -9,10 +9,10 @@ function Footer() {
     return (
         <footer>
             <div className="top">
-                <Link target="_blank" to="https://github.com/pranjaljain0/Vaccine-availability-tracker">Open Source</Link>
+                <a target="_blank" rel="noreferrer" href="https://github.com/pranjaljain0/Vaccine-availability-tracker">Open Source</a>
                 <div className="rightIcons">
-                    <Link to="mailto: hello@pranjaljain.me"><FiMail /></Link>
-                    <Link to="https://t.me/covidvaccinetrack"><FaTelegramPlane /></Link>
+                    <a href="mailto: hello@pranjaljain.me"><FiMail /></a>
+                    <a target="_blank" rel="noreferrer" href="https://t.me/covidvaccinetrack"><FaTelegramPlane /></a>
                 </div>
             </div>
             <div className="bottom">
