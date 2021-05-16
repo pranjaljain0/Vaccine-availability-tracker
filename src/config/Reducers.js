@@ -2,6 +2,7 @@ import moment from "moment";
 
 export const authInitialState = JSON.parse(localStorage.getItem("authPayload"));
 export const locationInitialState = JSON.parse(localStorage.getItem("locationPayload"));
+export const showNotificationsState = JSON.parse(localStorage.getItem("notificationPayload"));
 
 export const authReducer = (state, action) => {
     let payload = {}
@@ -46,7 +47,6 @@ export const authReducer = (state, action) => {
 
 
 export const locationReducer = (state, action) => {
-    let payload = {}
     switch (action.type) {
         case "LOCATION_INIT":
             return action.payload
@@ -55,6 +55,20 @@ export const locationReducer = (state, action) => {
             return action.payload
         case "SET_STATE":
             localStorage.setItem("locationPayload", JSON.stringify(action.payload))
+            return action.payload
+        default:
+            return state
+    }
+}
+
+export const showNotificationReducer = (state, action) => {
+    let payload = {}
+    switch (action.type) {
+        case "SET_PERMISSION":
+            localStorage.setItem("notificationPayload", JSON.stringify(action.payload))
+            return action.payload
+        case "TOGGLE_NOTIFICATION":
+            localStorage.setItem("notificationPayload", JSON.stringify(action.payload))
             return action.payload
         default:
             return state

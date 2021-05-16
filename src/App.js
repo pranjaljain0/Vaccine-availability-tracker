@@ -14,6 +14,10 @@ function App() {
     districtID: null,
     stateID: null,
   }))
+  localStorage.getItem("notificationPayload") === null && localStorage.setItem("notificationPayload", JSON.stringify({
+    userPermission: false,
+    showAlert: true,
+  }))
 
   useEffect(() => {
     if (!("Notification" in window)) {
@@ -21,8 +25,12 @@ function App() {
     } else {
       Notification.requestPermission();
     }
-    // setInterval(() => { showNotification() }, 10000)
+    setInterval(() => { showNotification() }, 10000)
   }, [])
+
+  const showNotification = () => {
+    new Notification('Hey')
+  }
 
   return (
     <Routes />
