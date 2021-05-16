@@ -26,6 +26,20 @@ footer {
 			padding: 4px 12px;
 			border-radius: 8px;
 		}
+
+		& .rightIcons {
+			font-size: 1.1em;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			& a {
+				padding: 8px 10px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		}
 	}
 
 	& .bottom {
@@ -36,7 +50,7 @@ footer {
 
 		& span {
 			color: rgba($color: #fff, $alpha: 0.7);
-			font-size: 0.9em;
+			font-size: 0.8em;
 			margin-bottom: 4px;
 		}
 	}
