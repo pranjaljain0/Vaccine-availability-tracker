@@ -7,14 +7,6 @@ export const authReducer = (state, action) => {
     let payload = {}
     console.log(action)
     switch (action.type) {
-        case "INIT":
-            payload = {
-                ...action.payload,
-                isAuth: false,
-                time: moment().format(),
-                hasDisconnected: false
-            }
-            return payload
         case "LOGIN":
             payload = {
                 ...action.payload,
@@ -33,6 +25,10 @@ export const authReducer = (state, action) => {
             }
             localStorage.setItem("authPayload", JSON.stringify(payload))
             return payload
+        case "LOGOUT":
+            localStorage.clear()
+            localStorage.setItem("authPayload", JSON.stringify(authInitialState))
+            return authInitialState
         case "HAS_DISCONNECTED":
             payload = {
                 token: action.payload.token,
@@ -41,12 +37,8 @@ export const authReducer = (state, action) => {
                 time: moment().format(),
                 hasDisconnected: true
             }
-            localStorage.setItem("authPayload", JSON.stringify(payload))
+            localStorage.getItem("authPayload") !== null && localStorage.setItem("authPayload", JSON.stringify(payload))
             return payload
-        case "LOGOUT":
-            localStorage.clear()
-            localStorage.setItem("authPayload", JSON.stringify(authInitialState))
-            return authInitialState
         default:
             return state
     }
