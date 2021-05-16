@@ -20,19 +20,19 @@ function App() {
   }))
 
   useEffect(() => {
-    if (!("Notification" in window)) {
-      console.log("This browser does not support desktop notification");
-    } else {
-      Notification.requestPermission();
-    }
-    navigator.serviceWorker.register('sw.js');
-    Notification.requestPermission(function (result) {
-      if (result === 'granted') {
-        navigator.serviceWorker.ready.then(function (registration) {
-          registration.showNotification('Notification with ServiceWorker');
-        });
-      }
-    });
+    // if (!("Notification" in window)) {
+    //   console.log("This browser does not support desktop notification");
+    // } else {
+    //   Notification.requestPermission();
+    // }
+    // navigator.serviceWorker.register('sw.js');
+    // Notification.requestPermission(function (result) {
+    //   if (result === 'granted') {
+    //     navigator.serviceWorker.ready.then(function (registration) {
+    //       registration.showNotification('Notification with ServiceWorker');
+    //     });
+    //   }
+    // });
     // setInterval(() => { showNotification() }, 10000)
   }, [])
 
