@@ -34,8 +34,6 @@ function Routes() {
         localStoreData !== undefined && localStoreData !== null && localStoreData.token !== undefined && setInterval(() => checkConn(localStoreData.token), 3000)
     }, [])
 
-    console.log(state)
-
     return (
         <Router>
             <Nav state={state} dispatch={dispatch} />
