@@ -1,7 +1,8 @@
 import "./AuthenticatedHome.scss"
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import { beneficiaries, calendarByDistrict, districts, states, } from "../../config/API"
+import { locationInitialState, locationReducer } from "../../config/Reducers"
 
 import { AiOutlineUserAdd } from "react-icons/ai"
 import { GoInfo } from "react-icons/go"
@@ -12,13 +13,16 @@ import axios from "axios"
 import classNames from "classnames"
 import moment from "moment"
 
-function AuthenticatedHome({ state, dispatch }) {
+function AuthenticatedHome({ authState, authDispatch }) {
     let config = {
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${state.token}`,
+            Authorization: `Bearer ${authState.token}`,
         }
     }
+
+    const [locationState, locationDispatch] = useReducer(locationReducer, locationInitialState)
+
     const [stateList, setStateList] = useState(null)
     const [districtList, setDistrictList] = useState(null)
     const [beneficialiesList, setBeneficialiesList] = useState(null)
@@ -42,10 +46,12 @@ function AuthenticatedHome({ state, dispatch }) {
     }
 
     const fetchDistricts = async (stateID) => {
+        locationDispatch({ type: "SET_STATE", payload: { ...locationState, stateID: stateID } })
         axios.get(districts + stateID, config).then(e => setDistrictList(e.data.districts))
     }
 
     const fetchDistrictData = async (distID) => {
+        locationDispatch({ type: "SET_STATE", payload: { ...locationState, districtID: distID } })
         axios.get(calendarByDistrict + `district_id=${distID}&date=${moment().format("DD-MM-YYYY")}`, config).then(e => {
             setCentersList(e.data.centers)
         })
@@ -54,8 +60,10 @@ function AuthenticatedHome({ state, dispatch }) {
     useEffect(() => {
         fetchStates()
         fetchBeneficiaries()
-    }, [])
 
+        locationState.stateID !== null && fetchDistricts(locationState.stateID)
+        locationState.districtID !== null && fetchDistrictData(locationState.districtID)
+    }, [])
     const truncateString = (string, length) => {
         return string.length < length ? string : `${string.slice(0, length - 3)}...`;
     };
@@ -98,14 +106,19 @@ function AuthenticatedHome({ state, dispatch }) {
                         onChange={e => fetchDistricts(e.target.value)}>
                         <option value={0} disabled>Select One</option>
                         {stateList !== undefined && stateList !== null && stateList.map((item, index) => {
-                            return (<option key={index} value={item.state_id}>{item.state_name}</option>)
+                            return (<option
+                                selected={parseInt(locationState.stateID) === parseInt(item.state_id)}
+                                key={index}
+                                value={item.state_id}>{item.state_name}</option>)
                         })}
                     </select>
                     <select
                         defaultValue={0}
                         onChange={e => fetchDistrictData(e.target.value)}>
                         {(districtList !== undefined && districtList !== null) ? districtList.map((item, index) => {
-                            return (<option key={index} value={item.district_id}>{item.district_name}</option>)
+                            return (<option
+                                selected={parseInt(locationState.districtID) === parseInt(item.district_id)}
+                                key={index} value={item.district_id}>{item.district_name}</option>)
                         }) : <option disabled value={0}>Select State</option>}
                     </select>
                 </div>

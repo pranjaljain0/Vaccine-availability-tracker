@@ -11,6 +11,10 @@ function App() {
       authToken: null,
       hasDisconnected: false
     }))
+    localStorage.getItem("locationPayload") === null && localStorage.setItem("locationPayload", JSON.stringify({
+      districtID: null,
+      stateID: null,
+    }))
   }, [])
   return (
     <Routes />
