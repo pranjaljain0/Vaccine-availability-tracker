@@ -21,14 +21,6 @@ function NewBenModal({ showAddBen, setShowAddBen, config }) {
         photo_id_type: 1
     })
 
-    const fetchGenders = async () => {
-        axios.get(genders, config).then(e => setGenderList(e.data.genders))
-    }
-
-    const fetchIDs = async () => {
-        axios.get(idTypes, config).then(e => { setIDList(e.data.types) })
-    }
-
     const addUser = async () => {
         axios.post(newID, config).then(e => {
             setShowAddBen(false)
@@ -40,9 +32,17 @@ function NewBenModal({ showAddBen, setShowAddBen, config }) {
     }
 
     useEffect(() => {
+        const fetchGenders = async () => {
+            axios.get(genders, config).then(e => setGenderList(e.data.genders))
+        }
+
+        const fetchIDs = async () => {
+            axios.get(idTypes, config).then(e => { setIDList(e.data.types) })
+        }
+
         fetchGenders()
         fetchIDs()
-    }, [])
+    }, [config])
 
     return showAddBen && (
         <div className="modal">
@@ -66,7 +66,7 @@ function NewBenModal({ showAddBen, setShowAddBen, config }) {
                             }}>
                                 {IDList !== undefined && IDList !== null &&
                                     IDList.map((item, index) => {
-                                        return (<option name={item.type} value={item.id}>{item.type}</option>)
+                                        return (<option key={index} name={item.type} value={item.id}>{item.type}</option>)
                                     })}
                             </select>
                         </div>

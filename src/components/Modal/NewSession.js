@@ -1,25 +1,22 @@
 import "./Modal.scss"
 
-import React, { useEffect, useState } from 'react'
-
 import { AiFillCloseCircle } from "react-icons/ai"
 import { GoInfo } from "react-icons/go"
 import { Link } from "react-router-dom"
-import axios from "axios"
+import React from 'react'
 import classNames from "classnames"
-import { schedule } from "../../config/API"
 
 function NewSession({ show, setShow, selSession, newSession, setNewSession, config }) {
 
-    const handleSubmit = async () => {
-        axios.post(schedule, newSession, config).then(e => {
-            setShow(false)
-            console.log(e.data)
-        }).catch(err => {
-            setShow(false)
-            console.log(err)
-        })
-    }
+    // const handleSubmit = async () => {
+    //     axios.post(schedule, newSession, config).then(e => {
+    //         setShow(false)
+    //         console.log(e.data)
+    //     }).catch(err => {
+    //         setShow(false)
+    //         console.log(err)
+    //     })
+    // }
 
     return show && (
         <div className="modal">

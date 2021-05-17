@@ -63,7 +63,9 @@ function AuthenticatedHome({ authState, authDispatch }) {
 
         locationState.stateID !== null && fetchDistricts(locationState.stateID)
         locationState.districtID !== null && fetchDistrictData(locationState.districtID)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
     const truncateString = (string, length) => {
         return string.length < length ? string : `${string.slice(0, length - 3)}...`;
     };

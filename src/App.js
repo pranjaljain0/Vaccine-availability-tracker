@@ -18,27 +18,30 @@ function App() {
     userPermission: false,
     showAlert: true,
   }))
+  localStorage.getItem("connPayload") === null && localStorage.setItem("connPayload", JSON.stringify({
+    isConnected: null
+  }))
 
   useEffect(() => {
-    // if (!("Notification" in window)) {
-    //   console.log("This browser does not support desktop notification");
-    // } else {
-    //   Notification.requestPermission();
+    function registerServiceWorker() {
+      return navigator.serviceWorker.register("/sw.js");
+    }
+    async function askUserPermission() {
+      return await Notification.requestPermission();
+    }
+    // async function createNotificationSubscription() {
+    //   //wait for service worker installation to be ready
+    //   const serviceWorker = await navigator.serviceWorker.ready;
+    //   // subscribe and return the subscription
+    //   return await serviceWorker.pushManager.subscribe({
+    //     userVisibleOnly: true,
+    //     applicationServerKey: pushServerPublicKey
+    //   });
     // }
-    // navigator.serviceWorker.register('sw.js');
-    // Notification.requestPermission(function (result) {
-    //   if (result === 'granted') {
-    //     navigator.serviceWorker.ready.then(function (registration) {
-    //       registration.showNotification('Notification with ServiceWorker');
-    //     });
-    //   }
-    // });
-    // setInterval(() => { showNotification() }, 10000)
+    registerServiceWorker()
+    askUserPermission()
   }, [])
 
-  const showNotification = () => {
-    new Notification('Hey')
-  }
 
   return (
     <Routes />

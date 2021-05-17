@@ -13,7 +13,8 @@ function Nav({ state, dispatch }) {
     const [TxnID, setTxnID] = useState(null)
     const [showOTPInput, setShowOTPInput] = useState(false)
     let localStoreData = JSON.parse(localStorage.getItem("authPayload"))
-
+    let localStoreConn = JSON.parse(localStorage.getItem("connPayload"))
+    // connPayload
     const resendOTP = async () => {
         const body = {
             mobile: localStoreData.mobile,
@@ -41,20 +42,21 @@ function Nav({ state, dispatch }) {
             <Link to="/">Covid Vaccine Tracker</Link>
             {localStoreData !== null && localStoreData.isAuth && <span className="button" onClick={_ => dispatch({ type: "LOGOUT" })}>LOGOUT</span>}
         </nav>
-        {localStoreData !== null && localStoreData.hasDisconnected === true && <div className="notification">
-            <div className="sendOTP">
-                Seems like your token is expired Re enter OTP to try Again
+        {localStoreData !== null && localStoreData.isAuth !== false &&
+            localStoreConn !== null && localStoreConn.isConnected === false && <div className="notification">
+                <div className="sendOTP">
+                    Seems like your token is expired Re enter OTP to try Again
             <span onClick={() => resendOTP()}>Re-send</span>
-            </div>
-            {showOTPInput && <div className="enteOTP">
-                <input type="text"
-                    value={OTP}
-                    onChange={(e) => {
-                        setOTP(e.target.value.replace(/\D/, ''))
-                    }} ></input>
-                <span onClick={() => verifyOTP()}>Verify</span>
+                </div>
+                {showOTPInput && <div className="enteOTP">
+                    <input type="text"
+                        value={OTP}
+                        onChange={(e) => {
+                            setOTP(e.target.value.replace(/\D/, ''))
+                        }} ></input>
+                    <span onClick={() => verifyOTP()}>Verify</span>
+                </div>}
             </div>}
-        </div>}
     </>)
 }
 

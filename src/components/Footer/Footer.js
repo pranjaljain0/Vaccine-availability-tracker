@@ -2,7 +2,6 @@ import "./Footer.scss"
 
 import { FaTelegramPlane } from "react-icons/fa"
 import { FiMail } from "react-icons/fi"
-import { Link } from "react-router-dom"
 import React from 'react'
 
 function Footer() {
