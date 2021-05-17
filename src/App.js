@@ -26,7 +26,7 @@ function App() {
     Notification.requestPermission(function (status) {
       console.log('Notification permission status:', status);
     });
-    displayNotification()
+    // displayNotification()
   }, [])
   function displayNotification() {
     if (Notification.permission === 'granted') {
