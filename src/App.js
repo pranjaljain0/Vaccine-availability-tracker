@@ -23,24 +23,19 @@ function App() {
   }))
 
   useEffect(() => {
-    function registerServiceWorker() {
-      return navigator.serviceWorker.register("/sw.js");
-    }
-    async function askUserPermission() {
-      return await Notification.requestPermission();
-    }
-    // async function createNotificationSubscription() {
-    //   //wait for service worker installation to be ready
-    //   const serviceWorker = await navigator.serviceWorker.ready;
-    //   // subscribe and return the subscription
-    //   return await serviceWorker.pushManager.subscribe({
-    //     userVisibleOnly: true,
-    //     applicationServerKey: pushServerPublicKey
-    //   });
-    // }
-    registerServiceWorker()
-    askUserPermission()
+    Notification.requestPermission(function (status) {
+      console.log('Notification permission status:', status);
+    });
+    displayNotification()
   }, [])
+
+  function displayNotification() {
+    if (Notification.permission === 'granted') {
+      navigator.serviceWorker.getRegistration().then(function (reg) {
+        reg.showNotification('Hello world!');
+      });
+    }
+  }
 
 
   return (
