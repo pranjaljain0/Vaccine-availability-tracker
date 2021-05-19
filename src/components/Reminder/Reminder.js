@@ -35,24 +35,21 @@ function Reminder() {
     }
 
     useEffect(() => {
-        if (localNotifData.showAlert === true) {
-            const fetchDistrictDataListner = async (distID) => {
-                showNotifState.showAlert && setInterval(() => {
-                    axios.get(calendarByDistrict + `district_id=${distID}&date=${moment().format("DD-MM-YYYY")}`).then(e => {
-                        checkAppointment(e.data.centers)
-                    })
-                }, 5000)
-            }
-
-            const checkAppointment = (centers) => {
-
-                centers !== undefined && centers !== null && centers.map((item, index) => {
-                    // item.sessions[0].available_capacity !== 0 && displayNotification()
-                })
-            }
-            displayNotification()
-            localNotifData.districtID !== null && fetchDistrictDataListner(localNotifData.districtID)
+        // const fetchDistrictDataListner = async (distID) => {
+        //     showNotifState.showAlert && setInterval(() => {
+        //         axios.get(calendarByDistrict + `district_id=${distID}&date=${moment().format("DD-MM-YYYY")}`).then(e => {
+        //             checkAppointment(e.data.centers)
+        //         })
+        //     }, 5000)
+        // }
+        const checkAppointment = (centers) => {
+            centers !== undefined && centers !== null && centers.map((item, index) => {
+                // item.sessions[0].available_capacity !== 0 && displayNotification()
+            })
         }
+        displayNotification()
+        // localNotifData.districtID !== null && fetchDistrictDataListner(localNotifData.districtID)
+
     }, [localNotifData])
 
     const checkDur = (startTime) => {
@@ -61,13 +58,12 @@ function Reminder() {
         const currentTime = moment()
         var timePassed = moment.utc(moment(currentTime, "DD/MM/YYYY HH:mm:ss").diff(moment(vTime, "DD/MM/YYYY HH:mm:ss"))).format("mm")
         console.log(timePassed)
-        return Number.parseInt(timePassed) > 30 && true
+        return Number.parseInt(timePassed) >= 30 && true
     }
 
     function displayNotification() {
         if (Notification.permission === 'granted') {
             navigator.serviceWorker.ready.then(function (reg) {
-                console.log(localStorage)
                 let swLocalVar = JSON.parse(localStorage.getItem("notificationPayload"))
                 checkDur(swLocalVar.lastNotif) && swLocalVar.showAlert && reg.showNotification(`Slots available!`, {
                     body: "Slots are available for vaccination! Go check on Cowin.", tag: 'slots-alert'
