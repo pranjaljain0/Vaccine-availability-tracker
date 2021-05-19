@@ -5,6 +5,7 @@ import { generateMobileOTP, validateMobileOtp } from "../../config/API"
 
 import { AiOutlineArrowRight } from "react-icons/ai"
 import { BsCheck } from "react-icons/bs"
+import Reminder from "../../components/Reminder/Reminder"
 import axios from "axios"
 import classNames from "classnames"
 import { sha256 } from "js-sha256"
@@ -34,32 +35,36 @@ function Home({ state, dispatch }) {
         })
     }
 
-    return (<div className="container-min">
-        <h2>Check your nearest vaccination center and slots availability.</h2>
-        <span>Enter your number</span>
-        <div className="inputContainer">
-            <input type="text" placeholder="+91 XXXXX XXXXX"
-                value={mobile}
-                onChange={(e) => {
-                    setMobile(e.target.value.replace(/\D/, ''))
-                }} disabled={txnID === null ? false : true}></input>
-            <div className={classNames("nextIconContainer", txnID !== null && "IconDisabled")} onClick={_ => callForOTP()}>
-                {txnID === null ? <AiOutlineArrowRight className="nextIcon" /> :
-                    <BsCheck className="nextIcon" />}
+    return (<>
+        <div className="container-min-home">
+            <h2>Check your nearest vaccination center and slots availability.</h2>
+            <span>Enter your number</span>
+            <div className="inputContainer">
+                <input type="text" placeholder="+91 XXXXX XXXXX"
+                    value={mobile}
+                    onChange={(e) => {
+                        setMobile(e.target.value.replace(/\D/, ''))
+                    }} disabled={txnID === null ? false : true}></input>
+                <div className={classNames("nextIconContainer", txnID !== null && "IconDisabled")} onClick={_ => callForOTP()}>
+                    {txnID === null ? <AiOutlineArrowRight className="nextIcon" /> :
+                        <BsCheck className="nextIcon" />}
+                </div>
             </div>
-
+            {txnID !== null && <div className="inputContainer">
+                <input type="text"
+                    value={OTP}
+                    onChange={(e) => {
+                        setOTP(e.target.value.replace(/\D/, ''))
+                    }} ></input>
+                <div className="nextIconContainer" onClick={_ => verifyOTP()}>
+                    <AiOutlineArrowRight className="nextIcon" />
+                </div>
+            </div>}
         </div>
-        {txnID !== null && <div className="inputContainer">
-            <input type="text"
-                value={OTP}
-                onChange={(e) => {
-                    setOTP(e.target.value.replace(/\D/, ''))
-                }} ></input>
-            <div className="nextIconContainer" onClick={_ => verifyOTP()}>
-                <AiOutlineArrowRight className="nextIcon" />
-            </div>
-        </div>}
-    </div>)
+        <div className="container-min-home">
+            <Reminder />
+        </div>
+    </>)
 }
 
 export default Home

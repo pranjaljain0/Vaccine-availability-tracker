@@ -1,7 +1,6 @@
 import "./assets/style/global.scss"
 
-import React, { useEffect } from "react"
-
+import React from "react"
 import Routes from "./Routes/Routes";
 
 function App() {
@@ -17,29 +16,13 @@ function App() {
   localStorage.getItem("notificationPayload") === null && localStorage.setItem("notificationPayload", JSON.stringify({
     userPermission: false,
     showAlert: true,
+    districtID: null,
+    stateID: null,
+    lastNotif: null,
   }))
   localStorage.getItem("connPayload") === null && localStorage.setItem("connPayload", JSON.stringify({
     isConnected: null
   }))
-
-  useEffect(() => {
-    Notification.requestPermission(function (status) {
-      console.log('Notification permission status:', status);
-    });
-    // displayNotification()
-  }, [])
-  function displayNotification() {
-    if (Notification.permission === 'granted') {
-      navigator.serviceWorker.getRegistration().then(function (reg) {
-        setInterval(() => reg.showNotification('Slots available! Go check on Cowin'), 5000)
-      });
-    }
-    else {
-      Notification.requestPermission(function (status) {
-        console.log('Notification permission status:', status);
-      });
-    }
-  }
 
   return (
     <Routes />

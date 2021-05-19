@@ -30,7 +30,12 @@ export const authReducer = (state, action) => {
             localStorage.setItem("authPayload", JSON.stringify(payload))
             return payload
         case "LOGOUT":
-            localStorage.clear()
+            localStorage.removeItem("authPayload")
+            localStorage.setItem("authPayload", JSON.stringify({
+                isAuth: false,
+                authToken: null,
+                hasDisconnected: false
+            }))
             return authInitialState
         default:
             return state
@@ -56,6 +61,12 @@ export const locationReducer = (state, action) => {
 export const showNotificationReducer = (state, action) => {
     switch (action.type) {
         case "SET_PERMISSION":
+            localStorage.setItem("notificationPayload", JSON.stringify(action.payload))
+            return action.payload
+        case "SET_STATE":
+            localStorage.setItem("notificationPayload", JSON.stringify(action.payload))
+            return action.payload
+        case "SET_DISTRICT":
             localStorage.setItem("notificationPayload", JSON.stringify(action.payload))
             return action.payload
         case "TOGGLE_NOTIFICATION":
