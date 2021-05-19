@@ -15,7 +15,7 @@ function App() {
   }))
   localStorage.getItem("notificationPayload") === null && localStorage.setItem("notificationPayload", JSON.stringify({
     userPermission: false,
-    showAlert: true,
+    showAlert: false,
     districtID: null,
     stateID: null,
     lastNotif: null,

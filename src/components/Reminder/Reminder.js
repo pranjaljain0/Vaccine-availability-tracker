@@ -45,33 +45,33 @@ function Reminder() {
             }
 
             const checkAppointment = (centers) => {
-                displayNotification()
+
                 centers !== undefined && centers !== null && centers.map((item, index) => {
                     // item.sessions[0].available_capacity !== 0 && displayNotification()
                 })
             }
-
+            displayNotification()
             localNotifData.districtID !== null && fetchDistrictDataListner(localNotifData.districtID)
         }
     }, [localNotifData])
 
-    function displayNotification() {
-        var options = { tag: 'slots-alert' };
-        if (Notification.permission === 'granted') {
-            navigator.serviceWorker.getRegistration().then(function (reg) {
-                const checkDur = (startTime) => {
-                    const vTime = moment(startTime)
-                    const currentTime = moment()
-                    var timePassed = moment.utc(moment(currentTime, "DD/MM/YYYY HH:mm:ss").diff(moment(vTime, "DD/MM/YYYY HH:mm:ss"))).format("mm")
-                    console.log(timePassed)
-                    return Number.parseInt(timePassed) > 30 && true
-                }
+    const checkDur = (startTime) => {
+        const vTime = moment(startTime)
+        if (startTime === null) { return true }
+        const currentTime = moment()
+        var timePassed = moment.utc(moment(currentTime, "DD/MM/YYYY HH:mm:ss").diff(moment(vTime, "DD/MM/YYYY HH:mm:ss"))).format("mm")
+        console.log(timePassed)
+        return Number.parseInt(timePassed) > 30 && true
+    }
 
+    function displayNotification() {
+        if (Notification.permission === 'granted') {
+            navigator.serviceWorker.ready.then(function (reg) {
+                console.log(localStorage)
                 let swLocalVar = JSON.parse(localStorage.getItem("notificationPayload"))
                 checkDur(swLocalVar.lastNotif) && swLocalVar.showAlert && reg.showNotification(`Slots available!`, {
                     body: "Slots are available for vaccination! Go check on Cowin.", tag: 'slots-alert'
-                })
-                    .then(() => localStorage.setItem("notificationPayload", JSON.stringify({ ...swLocalVar, lastNotif: moment().utc().format() })))
+                }).then(() => localStorage.setItem("notificationPayload", JSON.stringify({ ...swLocalVar, lastNotif: moment().utc().format() })))
             });
         }
         else {
@@ -80,15 +80,6 @@ function Reminder() {
             });
         }
     }
-
-    // console.log(localNotifData)
-    // {
-    //     "userPermission": "granted",
-    //         "showAlert": false,
-    //             "districtID": "312",
-    //                 "stateID": "20",
-    // }
-
 
     const fetchDistricts = async (stateID) => {
         showNotifDispatch({ type: "SET_STATE", payload: { ...showNotifState, stateID: stateID } })
