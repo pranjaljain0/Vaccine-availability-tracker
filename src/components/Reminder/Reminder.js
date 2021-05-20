@@ -35,21 +35,23 @@ function Reminder() {
     }
 
     useEffect(() => {
-        // const fetchDistrictDataListner = async (distID) => {
-        //     showNotifState.showAlert && setInterval(() => {
-        //         axios.get(calendarByDistrict + `district_id=${distID}&date=${moment().format("DD-MM-YYYY")}`).then(e => {
-        //             checkAppointment(e.data.centers)
-        //         })
-        //     }, 5000)
-        // }
+        const fetchDistrictDataListner = async (distID) => {
+            showNotifState.showAlert && setInterval(() => {
+                axios.get(calendarByDistrict + `district_id=${distID}&date=${moment().format("DD-MM-YYYY")}`).then(e => {
+                    console.log(e.data.centers)
+                    checkAppointment(e.data.centers)
+                })
+            }, 5000)
+        }
         const checkAppointment = (centers) => {
             centers !== undefined && centers !== null && centers.map((item, index) => {
+                console.log(item)
                 // item.sessions[0].available_capacity !== 0 && displayNotification()
             })
         }
         displayNotification()
         // localNotifData.districtID !== null && fetchDistrictDataListner(localNotifData.districtID)
-
+        fetchDistrictDataListner()
     }, [localNotifData])
 
     const checkDur = (startTime) => {
